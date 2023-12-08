@@ -223,6 +223,33 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Modal EDIT PW -->
+                    <div class="modal fade modal-mini modal-primary" id="modalEditpassword" tabindex="-1"
+                        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Tambah Kategori Menu</h5>
+                                    <a data-dismiss="modal" class="close-modal"><i
+                                            class="nc-icon nc-simple-remove"></i></a>
+                                </div>
+                                <form action="/kategori" method="post">
+                                    @csrf
+                                    <div class="modal-header justify-content-center">
+                                        <div class="col-lg-12">
+                                            <label for="nama_kategori">Nama Kategori Menu</label>
+                                            <input class="form-control input-modal" id="nama_kategori"
+                                                name="nama_kategori" type="text" placeholder="Nama Kategori Menu...">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-success btn-fill">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  End Modal -->
                 </div>
             </div>
         </div>

@@ -7,7 +7,7 @@
     <div class="sidebar-wrapper">
         <div class="logo">
             <a href="/dashboard" class="simple-text">
-                Point Of Sales APP
+                Untuknya Semangatt
             </a>
         </div>
         <ul class="nav">

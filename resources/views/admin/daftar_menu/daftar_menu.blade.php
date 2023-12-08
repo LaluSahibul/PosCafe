@@ -12,7 +12,10 @@
                                 data-toggle="modal" data-target="#modalTambah">Tambah Daftar Menu (F2)</button>
                         </div>
                         <div class="card-body table-full-width table-responsive">
-                            <table class="table table-hover table-striped">
+                            <div class="col-lg-12">
+                                <input type="text" class="form-control" id="searchInput" placeholder="Search...">
+                            </div>
+                            <table class="table table-hover table-striped" id="daftar_menu">
                                 <thead>
                                     <th>ID</th>
                                     <th>Nama Menu</th>
@@ -28,7 +31,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $menu->nama_menu }}</td>
                                             <td>{{ $menu->kategori->nama_kategori }}</td>
-                                            <td>{{ $menu->harga }}</td>
+                                            <td>{{ 'Rp ' . number_format($menu->harga, 0, ',', '.') }}</td>
                                             <td>{{ $menu->status }}</td>
                                             <td>{{ $menu->total_dipesan }}</td>
                                             <td>
@@ -77,7 +80,8 @@
                                                     <div class="col-lg-12">
                                                         <label for="harga">Harga</label>
                                                         <input class="form-control input-modal" id="harga"
-                                                            name="harga" type="text" placeholder="Harga...">
+                                                            oninput="formatRupiah()" name="harga" type="text"
+                                                            placeholder="Harga...">
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <label for="status">Status</label>
@@ -97,28 +101,52 @@
                                 </div>
                             </div>
                             <!--  End Modal -->
-
                             <!-- Modal Edit -->
                             <div class="modal fade modal-mini modal-primary" id="modalEdit" tabindex="-1" role="dialog"
                                 aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">Edit Kategori Menu</h5>
+                                            <h5 class="modal-title">Edit Menu</h5>
                                             <a data-dismiss="modal" class="close-modal"><i
                                                     class="nc-icon nc-simple-remove"></i></a>
                                         </div>
-                                        <form action="/edit_kategori" method="post">
+                                        <form action="/edit_menu" method="post">
                                             @csrf
                                             @method('post')
                                             <div class="modal-header justify-content-center">
-                                                <input class="form-control" id="id_kategori" name="id_kategori"
+                                                <input class="form-control" id="id_menu_edit" name="id_menu_edit"
                                                     type="hidden">
-                                                <div class="col-lg-12">
-                                                    <label for="edit_nama_kategori">Nama Kategori Menu</label>
-                                                    <input class="form-control input-modal" id="edit_nama_kategori"
-                                                        name="edit_nama_kategori" type="text"
-                                                        placeholder="Nama Kategori Menu...">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <label for="edit_nama_menu">Nama Menu</label>
+                                                        <input class="form-control input-modal" id="edit_nama_menu"
+                                                            name="edit_nama_menu" type="text"
+                                                            placeholder="Nama Menu...">
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <label for="edit_kategori_menu">Kategori Menu</label>
+                                                        <select class="form-control input-modal" id="edit_kategori_menu"
+                                                            name="edit_kategori_menu" type="text">
+                                                            @foreach ($kategoris as $kategori)
+                                                                <option value="{{ $kategori->id }}">
+                                                                    {{ $kategori->nama_kategori }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <label for="edit_harga">Harga</label>
+                                                        <input class="form-control input-modal" id="edit_harga"
+                                                            name="edit_harga" type="text" placeholder="Harga...">
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <label for="edit_status">Status</label>
+                                                        <select class="form-control input-modal" id="edit_status"
+                                                            name="edit_status" type="text">
+                                                            <option value="tersedia">Tersedia</option>
+                                                            <option value="kosong">Kosong</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -170,11 +198,11 @@
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                                 Cancel
                                             </button>
-                                            <form action="/hapus_kategori" method="post">
+                                            <form action="/hapus_menu" method="post">
                                                 @csrf
                                                 @method('post')
-                                                <input class="form-control" id="id_kategori_hapus"
-                                                    name="id_kategori_hapus" type="hidden">
+                                                <input class="form-control" id="id_menu_hapus" name="id_menu_hapus"
+                                                    type="hidden">
                                                 <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                         viewBox="0 0 24 24">

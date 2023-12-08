@@ -12,7 +12,10 @@
                                 data-toggle="modal" data-target="#modalTambah">Tambah Kategori Menu (F2)</button>
                         </div>
                         <div class="card-body table-full-width table-responsive">
-                            <table class="table table-hover table-striped">
+                            <div class="col-lg-12">
+                                <input type="text" class="form-control" id="searchInput" placeholder="Search...">
+                            </div>
+                            <table class="table table-hover table-striped" id="daftar_kategori_menu">
                                 <thead>
                                     <th>ID</th>
                                     <th>Kategori Menu</th>

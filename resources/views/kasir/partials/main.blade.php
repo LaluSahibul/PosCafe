@@ -35,14 +35,14 @@
 </head>
 
 <body>
-    <div class="wrapper">
-        @include('admin.partials.sidebar')
-        <div class="main-panel">
-            @include('admin.partials.header')
-            @yield('content_admin')
-            @include('admin.partials.footer')
-        </div>
-    </div>
+    {{-- <div class="wrapper">
+        @include('kasir.partials.sidebar')
+        <div class="main-panel"> --}}
+    @include('kasir.partials.header')
+    @yield('content_kasir')
+    @include('kasir.partials.footer')
+    {{-- </div>
+    </div> --}}
     <!--   -->
     {{-- menu untuk setting tema --}}
 

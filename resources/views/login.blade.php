@@ -31,7 +31,8 @@
             {{-- <div class="col-lg-12"></div>
             <div class="col-lg-12"> --}}
             <div class="col-lg-12 text-center" style="margin-top: 150px;">
-                <a class="btn big-login" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Log
+                <a class="btn big-login" id="loginButton" data-toggle="modal" href="javascript:void(0)"
+                    onclick="openLoginModal();">Log
                     in</a>
             </div>
         </div>
@@ -67,8 +68,9 @@
                             </div>
                             <div class="error"></div>
                             <div class="form loginBox">
-                                <form method="" action="/dashboard" accept-charset="UTF-8">
-                                    <input id="text" class="form-control" type="text" placeholder="username"
+                                <form action="/login" method="POST" accept-charset="UTF-8">
+                                    @csrf
+                                    <input class="form-control" type="text" placeholder="username" id="username"
                                         name="username">
                                     <input id="password" class="form-control" type="password" placeholder="Password"
                                         name="password"><br>
@@ -113,7 +115,12 @@
     <script type="text/javascript">
         $(document).ready(function() {
             openLoginModal();
+
+            $('#loginModal').on('shown.bs.modal', function() {
+                document.getElementById("username").focus();
+            });
         });
+        document.getElementById("loginButton").focus();
     </script>
 
 

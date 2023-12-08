@@ -23,21 +23,29 @@ class MenuController extends Controller
             'harga' => 'required',
             'status' => 'required',
         ]);
+        $harga = $request->harga;
+        $rupiahIntegerHarga = (int)str_replace(['Rp. ', ',', '.'], '', $harga);
+        $data['harga'] = $rupiahIntegerHarga;
         Menu::create($data);
         return redirect('/menu');
     }
     public function editMenu(Request $request)
     {
-        $id = $request->id_mneu;
+        $id = $request->id_menu_edit;
+        $harga = $request->edit_harga;
+        $rupiahIntegerHarga = (int)str_replace(['Rp. ', ',', '.'], '', $harga);
 
         Menu::where('id', $id)->update([
-            'nama_menu' => $request->edit_nama_kategori,
+            'nama_menu' => $request->edit_nama_menu,
+            'kategori_menu' => $request->edit_kategori_menu,
+            'harga' => $rupiahIntegerHarga,
+            'status' => $request->edit_status,
         ]);
         return redirect('/menu');
     }
     public function hapusMenu(Request $request)
     {
-        Menu::where('id', $request->id_kategori_hapus)->delete();
-        return redirect('/kategori');
+        Menu::where('id', $request->id_menu_hapus)->delete();
+        return redirect('/menu');
     }
 }
