@@ -33,32 +33,50 @@
                             </form>
                         </div>
                     </div>
-                    <div class="row" id="daftarMenu">
-                        {{-- START HERE --}}
-                        @foreach ($menus as $menu)
-                            <div class="col-lg-6">
-                                <div class="card">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="card-body">
-                                                <img src="/assets/img/default-avatar.png" width="150" height="150"
-                                                    alt="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-8 mt-3">
-                                            <div class="card-body">
-                                                <span id="namaMenu">
-                                                    <p>Nama Menu : {{ $menu->nama_menu }}</p>
-                                                    <p>Kategori : {{ $menu->kategori->nama_kategori }}</p>
-                                                    <p>Harga : {{ 'Rp ' . number_format($menu->harga, 0, ',', '.') }}</p>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
+                    <div class="card ">
+                        <div class="row">
+                            <div class="col-md-8">
+                                {{-- START HERE --}}
+                                <div class="card-body table-responsive">
+                                    <table class="table table-hover table-striped" style="display: none" id="daftar_menu">
+                                        <thead>
+                                            <th>ID</th>
+                                            <th>Nama Menu</th>
+                                            <th>Kategori Menu</th>
+                                            <th>Harga</th>
+                                            <th>Status</th>
+                                            <th>Aksi</th>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($menus as $menu)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $menu->nama_menu }}</td>
+                                                    <td>{{ $menu->kategori->nama_kategori }}</td>
+                                                    <td>{{ 'Rp ' . number_format($menu->harga, 0, ',', '.') }}</td>
+                                                    @if ($menu->status === 'tersedia')
+                                                        <td style="color: blue; text-transform:capitalize;">
+                                                            {{ $menu->status }}
+                                                        </td>
+                                                    @else
+                                                        <td style="color:crimson; text-transform:capitalize;">
+                                                            {{ $menu->status }}</td>
+                                                    @endif
+                                                    <td>
+                                                        <button type="button" class="btn btn-warning btn-fill ml-2"
+                                                            data-toggle="modal" data-target="#modalEdit">Pesan
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                            {{-- END HERE --}}
-                        @endforeach
+                            <div class="col-md-4">
+                                <!-- disini kodenya ntar -->
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
